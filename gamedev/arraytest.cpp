@@ -29,6 +29,66 @@ void UnorderedArrayTest()
     cout << "Search for 53 was found at index: ";
     cout << array.search(53);
     cout << endl << endl;
+
+    array.push(83);
+    array.push(82);
+    array.BubbleSort();
+
+    cout << "bubble sorted array contents: ";
+
+    for(int i = 0; i < array.GetSize(); i++){
+        cout << array[i] << " ";
+    }
+    cout << endl;
+
+    array.clear();
+
+    cout << "cleared array contents: ";
+
+    for(int i = 0; i < array.GetSize(); i++){
+        cout << array[i] << " ";
+    }
+    cout << endl;
+
+    array.push(3);
+    array.push(53);
+    array.push(83);
+    array.push(23);
+    array.push(82);
+
+    array.SelectionSort();
+
+    cout << "selection sorted array contents: ";
+
+    for(int i = 0; i < array.GetSize(); i++){
+        cout << array[i] << " ";
+    }
+    cout << endl;
+
+    array.clear();
+
+    cout << "cleared array contents: ";
+
+    for(int i = 0; i < array.GetSize(); i++){
+        cout << array[i] << " ";
+    }
+    cout << endl;
+
+    array.push(3);
+    array.push(53);
+    array.push(83);
+    array.push(23);
+    array.push(82);
+
+    array.InsertionSort();
+
+    cout << "insertion sorted array contents: ";
+
+    for(int i = 0; i < array.GetSize(); i++){
+        cout << array[i] << " ";
+    }
+    cout << endl;
+
 }
 void OrderedArrayTest()
 {
@@ -57,7 +117,7 @@ void OrderedArrayTest()
     cout << endl << endl;
 
     cout << "Search for 12 was found at index through recursive binary search: ";
-    cout << array.recursiveSearch(123);
+    cout << array.recursiveSearch(12);
     cout << endl << endl;
 
     OrderedArray<int> array2(3);
@@ -66,29 +126,32 @@ void OrderedArrayTest()
     
     array2.binaryInsert(43);
     array2.binaryInsert(8);
-    array2.binaryInsert(23);
+    array2.binaryInsert(24);
     array2.binaryInsert(94);
     array2.binaryInsert(17);
-    array2.binaryInsert(12);
+    array2.binaryInsert(11);
     array2.binaryInsert(123);
     array2.binaryInsert(65);
+    array2.binaryInsert(123);
+    array2.binaryInsert(124);
 
-    for(int i = 0; i < array.GetSize(); i++){
-        cout << array[i] << " ";
+    for(int i = 0; i < array2.GetSize(); i++){
+        cout << array2[i] << " ";
     }
     cout << endl;
 
-    
-
-    cout << "Search for 12 was found at index: ";
-    cout << array.search(12);
+    cout << "Search for 124 was found at index: ";
+    cout << array2.search(125);
     cout << endl << endl;
 
-    cout << "Search for 12 was found at index through recursive binary search: ";
-    cout << array.recursiveSearch(123);
+    cout << "Search for 125 was not found at index: ";
+    cout << array2.search(125);
+    cout << endl << endl;
+
+    cout << "Search for 94 was found at index through recursive binary search: ";
+    cout << array2.recursiveSearch(94);
     cout << endl << endl;
 }
-
 
 int main(int args, char **argc)
 {

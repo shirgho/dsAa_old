@@ -12,7 +12,7 @@ using namespace std;
     SomeClass someArray[100]; calls a 100 constructors for 100 objects.
 
     vector<SomeClass> someVec;
-    someVec.reserve(100); no constructors are exuted to store.
+    someVec.reserve(100); no constructors are executed to store.
 
 */
 
