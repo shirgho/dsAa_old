@@ -2,8 +2,10 @@
 
 Recursion and Iteration
 */
-
+#include <assert.h> 
 #include <iostream>
+#include <limits>
+
 using namespace std;
 
 
@@ -93,18 +95,69 @@ void recursiveSeriesNegative(int n){
 
     if(n <= 0)
         return;
-    cout << " " << n;
+    cout << n << endl;
     recursiveSeriesNegative(n - 1);
+}
+
+int triangularNumberIterative(int term)
+{
+    int value = 0;
+
+    while (term > 0){
+        value += term;
+        term--;
+    }
+
+    return value;
+}
+
+int triangularNumberRecursive(int term)
+{
+    int value = term;
+    //base case
+    if (term == 1) return 1;
+    //recurse case
+    //return (triangularNumberRecursive(term-1) + term);
+    value += triangularNumberRecursive(term-1);
+    return value;
+    
+}
+
+//raising number to power using recursion
+int recursivePow(int number, int power)
+{
+    //5² = 5 x 5 (2-1 = 1 time)
+    //5^power = 5 x 5 (power-1 times)
+
+    assert(power >= 0);
+
+    // base case
+    if (power == 0) return 1;
+    // recursive case
+    return (number * recursivePow(number, power-1));
+}
+
+int doubleFactorial(int n){
+    //n * (n-2) * (n-4) until n is 0 or 1
+
+    assert(n >= 0);
+    //base case
+    if (n == 0 || n == 1) return 1;
+    //recurse case
+    return (n * doubleFactorial(n-2));
 }
 
 int main () {
     int n = 1;
-    cout << "Enter the number to be factorialed or fibonacisosised: \n" << endl;
+    int power = n;
+
+    cout << "Enter the number to be factorialed or fibonacisosised or otherwised: ";
     cin >> n;
 
-    cout << "Recursive Factorial of " << n << " is " << factorialRecursive(n) << endl;
-    cout << "Iterative Factorial of " << n << " is " << factorialIterative(n) << endl;
-     
+    cout << "Recursive Factorial of " << n << " is " << factorialRecursive(n) << "." << endl;
+    cout << "Iterative Factorial of " << n << " is " << factorialIterative(n) << "." << endl;
+    cout << "The double recursive factorial of " << n << " is " << doubleFactorial(n) << "." << endl;
+
     cout << "Iterative fibonacci of " << n << " is " << endl;
     fibonacciIerative(n);
     cout << "Recursive fibonacci of " << n << " is " << endl << "1" << endl;
@@ -115,6 +168,25 @@ int main () {
 
     cout << "recursiveSeriesNegative of " << n << " is " << endl ;
     recursiveSeriesNegative(n);
+
+    cout << "The value of the " << n << "th triangular term using a loop: ";
+    cout << triangularNumberIterative(n) << "." << endl;
+
+    cout << "The value of the " << n << "th triangular term using recursion: ";
+    cout << triangularNumberRecursive(n);
+    cout << '.' << endl;
+
+    do{
+        std::cin.clear();
+        cout << "Enter the power (valid positive number or 0) you wish to raise current number to: " ;
+        cin >> power;
+    }
+    while (!std::cin.good());
+
+    cout << "The value of raising " << n << " to the power " << power << " using recursion is: ";
+    cout << recursivePow(n, power);
+    cout << '.' << endl;
+
 
     return 0;
 }
