@@ -33,8 +33,8 @@ Also contains algorithms such as linear search, and now will add sort algorithms
 
 ## Insertion Sort O(n²)
 - runs well on already partially or inserting an item in fully sorted list, can quit early
-- if list is in reverse order (descending), is worst case, will need maximum comparisons and shifts, same
-performance as bubble sort.
+- if list is in reverse order (descending), is worst case, will need maximum comparisons and shifts, same performance as bubble sort.
+- he best-case time is O(n × 1) = O(n) and the worst-case time is O(n × n) = O(n²)
 - take i-1 item as sorted, go next item (which is now current item, i) and compare with prev 
 - if prev is bigger, shift it to the right, and compare i with i-2, until 0th item is reached
 - if i was smaller than all, shifted to 0th position
