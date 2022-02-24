@@ -79,11 +79,13 @@ class OrderedArray
             assert(upperBound < m_numElements);
 
             int index = lowerBound + ((upperBound - lowerBound) / 2);
+            // index = lower + upper, simple version but int can overflow
 
             if (m_array[index] == searchKey){
                 std::cout << "found!" << std::endl;
                 return index;
             } else if (lowerBound > upperBound){
+                // valid not found, end condition for the recursion
                 return -1;
             } else if (m_array[index] > searchKey){
                 upperBound = index - 1;
@@ -110,11 +112,12 @@ class OrderedArray
             }
         
             int i = 0;
+            // find the first value that is greater than the inserting value
             for(i = 0; i < m_numElements; i++){
                 if(m_array[i] > val)
                 break;
             }
-
+            
             for(int k = m_numElements; k > i; k--){
                 m_array[k] = m_array[k - 1];
             }
@@ -134,16 +137,33 @@ class OrderedArray
             }
 
             // find the first value that is greater than inserting value
-            int pos = findPos(val, 0, m_numElements -1);
-            std::cout << "value of pos: " << pos << std::endl;
+            int pos = 0;
 
-            for(int k = m_numElements; k > pos; k--){
-                m_array[k] = m_array[k - 1];
+            if(m_numElements == 0){
+                pos = 0;
+            } else {
+                pos = findPos(val, 0, m_numElements - 1);
             }
+
+            if (pos >= 0){
+                // shift everything starting from pos up, to make room at pos for new element
+                std::cout << "valid value of pos: " << pos << std::endl;
+                for(int k = m_numElements; k >= pos; k--){
+                    m_array[k+1] = m_array[k];
+                }
+            } else {
+                std::cout << "invalid value of pos: " << pos << std::endl;
+                return pos;
+            }
+      
+            
             
             m_array[pos] = val;
             m_numElements++;
+            std::cout << "number of elements: " << m_numElements << std::endl;
+            
             return pos;
+
         }
 
         int findPos(T searchKey, int lowerBound, int upperBound)
@@ -154,26 +174,36 @@ class OrderedArray
 
             int index = lowerBound + ((upperBound - lowerBound) / 2);
 
-            if (m_array[index] == searchKey){
+            if (lowerBound > upperBound){
+                std::cout << "Valid position is after all current items" << std::endl;
+                std::cout << "Inserting new item in expanded array" << std::endl;
+                return lowerBound;
+            } else if (m_array[index] == searchKey){
                 std::cout << "No duplicates allowed!" << std::endl;
-                return index;
-            } else if (lowerBound > upperBound){
-                std::cout << "went over bounds" << std::endl;
+                std::cout << index << std::endl;
+                std::cout << m_array[index] << std::endl;
+                std::cout << searchKey << std::endl;
                 return -1;
             } else if (m_array[index] > searchKey){
-                if (m_array[index - 1] == searchKey){
-                     std::cout << "found pos at " << index << std::endl;
+                if (m_array[index - 1] < searchKey){
+                    std::cout << "found pos at " << index << std::endl;
                     return index;
                 } else {
                     upperBound = index - 1;
-                     std::cout << "going to upper case find " << index << std::endl;
-                    return find(searchKey, lowerBound, upperBound);
+                    std::cout << "going to upper case find " << index << std::endl;
+                    return findPos(searchKey, lowerBound, upperBound);
                 }              
-            } else {
+            } else if (m_array[index] < searchKey){
+                if (m_array[index + 1] > searchKey){
+                    std::cout << "found pos at " << index << std::endl;
+                    return (index + 1);
+                } else {
+                    lowerBound = index + 1;
+                    std::cout << "going to lower case find " << index << std::endl;
+                    return findPos(searchKey, lowerBound, upperBound);
+                }
                 
-                lowerBound = index + 1;
-                 std::cout << "going to lower case find " << index << std::endl;
-                return find(searchKey, lowerBound, upperBound);
+                
             }
 
             /*

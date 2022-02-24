@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.xodr": "xodr",
         "iostream": "cpp",
         "xutility": "cpp",
         "xstring": "cpp",
@@ -40,6 +41,21 @@
         "iterator": "cpp",
         "numeric": "cpp",
         "string": "cpp",
-        "tuple": "cpp"
+        "tuple": "cpp",
+        "array": "cpp",
+        "atomic": "cpp",
+        "*.tcc": "cpp",
+        "cctype": "cpp",
+        "clocale": "cpp",
+        "cstdarg": "cpp",
+        "cwctype": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp",
+        "functional": "cpp",
+        "memory_resource": "cpp",
+        "optional": "cpp",
+        "string_view": "cpp",
+        "fstream": "cpp",
+        "sstream": "cpp"
     }
 }
