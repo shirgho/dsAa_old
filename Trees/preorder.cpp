@@ -1,6 +1,8 @@
 /*Pre order run through of a tree*/
 
 // Functins defined in library
+
+/*
 ROOT(T);
 LABEL(n, T);
 CREATEi(c, T1, T2,, ..., Ti);
@@ -8,6 +10,8 @@ MAKENULL(T);
 PARENT(n, T);
 LEFTMOST_CHILD(n, T);
 RIGHT_SIBLING(n, T);
+
+*/
 
 node n = ROOT(T);
 PREORDER(n);
@@ -25,5 +29,8 @@ int PREORDER(node n){
   }
   
 }
+
+
+
 
 //non recursive solution
