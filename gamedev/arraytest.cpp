@@ -89,6 +89,34 @@ void UnorderedArrayTest()
     }
     cout << endl;
 
+    array.clear();
+
+    cout << "cleared array contents: ";
+
+    for(int i = 0; i < array.GetSize(); i++){
+        cout << array[i] << " ";
+    }
+    cout << endl;
+
+    array.push(3);
+    array.push(53);
+    array.push(83);
+    array.push(23);
+    array.push(182);
+    array.push(682);
+    array.push(282);
+    array.push(82);
+    array.push(10982);
+
+    array.MergeSort();
+
+    cout << "Merge sorted array contents: ";
+
+    for(int i = 0; i < array.GetSize(); i++){
+        cout << array[i] << " ";
+    }
+    cout << endl;
+
 }
 void OrderedArrayTest()
 {

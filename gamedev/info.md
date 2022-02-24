@@ -43,7 +43,7 @@ performance as bubble sort.
 # orderedarray.cpp
 
 Contains custom Ordered Array class. Is already sorted through a push method, which uses a form of insertion sort (also modified to binary search insertion sort) to keep the array sorted as new elements are added.
-
+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 
 It has binary search available instead of linear search, which reduces complexity from O(n) to O(log n). 
 
 And I'm sure probably some other functions etc for the array class.

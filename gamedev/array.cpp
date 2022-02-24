@@ -109,6 +109,17 @@ class UnorderedArray
 
         }
 
+        // creates temp array and passes parameters to private mergesort func
+        void MergeSort()
+        {
+            assert(m_array != NULL);
+
+            T *tempArray = new T[m_numElements];
+            assert(tempArray != NULL);
+
+            MergeSort(tempArray, 0, m_numElements -1);
+            delete[] tempArray;
+        } 
 
         virtual T& operator[](int index)
         {
@@ -158,7 +169,7 @@ class UnorderedArray
         {
             assert(val >= 0);
             m_growSize = val;
-        }   
+        }  
 
     private:
         T *m_array;
@@ -182,6 +193,51 @@ class UnorderedArray
             m_maxSize += m_growSize;
 
             return true;
+        }
+
+        void MergeSort(T *tempArray, int lowerBound, int upperBound)
+        {
+            if (lowerBound == upperBound) return;
+            // split list at mid
+            int mid = lowerBound + ((upperBound - lowerBound) / 2);
+            // further split each list at its mid until one element leaves
+            MergeSort(tempArray, lowerBound, mid);
+            MergeSort(tempArray, mid+1, upperBound);
+            // merge back up until complete list merged (and sorted by merge)
+            Merge(tempArray, lowerBound, mid+1, upperBound);
+        }
+
+        void Merge(T *tempArray, int lowerBound, int mid, int upperBound)
+        {
+            int tempLow = lowerBound, tempMid = mid - 1;
+            int index = 0;
+
+            // start merging the two lists
+            // one is from tempLow to mid, other is tempMid to upperBound
+            // items are compared and put into the tempArray
+            while (lowerBound <= tempMid && mid <= upperBound){
+                if (m_array[lowerBound] < m_array[mid]){
+                    tempArray[index++] = m_array[lowerBound++];
+                } else {
+                    tempArray[index++] = m_array[mid++];
+                }
+            }
+
+            //if upper lists finishes first, fill temp array with remaining items from lower list
+            while (lowerBound <= tempMid){
+                tempArray[index++] = m_array[lowerBound++];
+            }
+
+            // or vice versa
+            while (mid <= upperBound){
+                tempArray[index++] = m_array[mid++];
+            }
+
+            for (int i = 0; i < upperBound - tempLow + 1; i++){
+                m_array[tempLow + i] = tempArray[i];
+            }
+
+
         }
 
 };
